@@ -3,206 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قنبر366 | عرض تصميم احترافي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <title>kanbar366 | Ultimate Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #00d2ff;
-            --secondary: #3a7bd5;
-            --dark: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #f59e0b; /* لون برتقالي للتنبيه */
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Cairo', sans-serif;
+            --bg: #0b0e14;
+            --accent: #00d2ff;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
         }
 
         body {
-            background-color: var(--dark);
-            color: #f8fafc;
-            line-height: 1.6;
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
+            margin: 0;
         }
 
-        /* شريط التنبيه العلوي */
-        .top-notice {
-            background: var(--accent);
-            color: #000;
-            text-align: center;
-            padding: 8px 0;
-            font-weight: bold;
-            font-size: 0.9rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+        /* تأثير الخلفية الشبكية المتحركة */
+        .bg-grid {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(var(--border) 1px, transparent 1px), 
+                              linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            mask-image: radial-gradient(circle, black, transparent 80%);
         }
 
-        /* الهيدر */
         header {
-            height: 100vh;
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(58, 123, 213, 0.5)), 
-                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1500');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            padding: 30px 10%;
+            display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+        }
+
+        .brand { font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; color: var(--accent); }
+
+        .ultimate-title {
+            text-align: center; margin: 100px 0;
+        }
+
+        .ultimate-title h1 {
+            font-size: 5rem; margin-bottom: 20px;
+            background: linear-gradient(to bottom, #fff, #666);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        /* قسم المشاريع الفخم */
+        .projects-showcase {
+            padding: 0 10%;
+            display: flex; flex-direction: column; gap: 100px;
+        }
+
+        .project-row {
+            display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px;
             align-items: center;
-            text-align: center;
-            padding: 20px;
         }
 
-        .hero-box {
-            animation: fadeIn 1.5s ease-out;
+        .project-row:nth-child(even) { direction: ltr; }
+        .project-row:nth-child(even) .project-info { direction: rtl; }
+
+        .code-preview {
+            background: #000; border-radius: 20px; padding: 25px;
+            border: 1px solid var(--border); position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            font-family: 'Courier New', Courier, monospace;
+            color: #569cd6; font-size: 0.9rem;
+            overflow: hidden;
         }
 
-        h1 {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, #fff, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .code-preview::before {
+            content: "Terminal"; position: absolute; top: 0; left: 0; width: 100%;
+            background: #1a1a1a; padding: 5px 20px; color: #888; font-size: 0.7rem;
         }
 
-        .hero-p {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            max-width: 700px;
+        .project-card {
+            background: var(--glass); border: 1px solid var(--border);
+            border-radius: 30px; padding: 40px;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(5px);
         }
 
-        /* قسم المميزات */
-        .features {
-            padding: 100px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+        .project-card:hover {
+            transform: scale(1.02); border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
         }
 
-        .feature-card {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.3s;
-            text-align: center;
+        .project-card h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .tag-list { display: flex; gap: 10px; margin-bottom: 30px; }
+        .tag-list span { 
+            background: rgba(0, 210, 255, 0.1); border: 1px solid var(--accent);
+            padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; color: var(--accent);
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2);
-        }
-
-        .icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .feature-card h3 {
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        /* قسم "لماذا أنا؟" */
-        .about-section {
-            background: #161e2e;
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .status-badge {
-            background: rgba(0, 210, 255, 0.1);
-            color: var(--primary);
-            padding: 5px 20px;
-            border-radius: 50px;
+        .btn-live {
+            padding: 15px 40px; border-radius: 50px; border: none;
+            background: #fff; color: #000; font-weight: bold;
+            cursor: pointer; transition: 0.3s; text-decoration: none;
             display: inline-block;
-            margin-bottom: 20px;
-            font-weight: bold;
         }
 
-        /* التجاوب */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .hero-p { font-size: 1.1rem; }
-        }
+        .btn-live:hover { background: var(--accent); transform: translateY(-5px); }
 
-        /* الفوتر */
+        /* Footer */
         footer {
-            padding: 50px 20px;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center; padding: 100px 0; color: #555;
         }
 
-        .copyright {
-            opacity: 0.6;
-            font-size: 0.9rem;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
     </style>
 </head>
 <body>
 
-    <div class="top-notice">
-        ⚠️ تنبيه: هذا الموقع مخصص **للعرض الفني فقط** - حقوق التصميم محفوظة لـ قنبر366
-    </div>
+    <div class="bg-grid"></div>
 
     <header>
-        <div class="hero-box">
-            <span class="status-badge">موقع قنبر366</span>
-            <h1>تصميم عصري وجذاب</h1>
-            <p class="hero-p">أصمم لك صفحات Landing Page متناسقة بالألوان والخطوط لتجذب زوارك وتضمن بقاءهم.</p>
-            <div style="display: flex; gap: 15px; justify-content: center;">
-                <button style="padding: 12px 30px; border-radius: 50px; border: none; background: var(--primary); color: #000; font-weight: bold; cursor: pointer;">ابدأ مشروعك</button>
-                <button style="padding: 12px 30px; border-radius: 50px; border: 1px solid #fff; background: transparent; color: #fff; cursor: pointer;">عرض الأعمال</button>
-            </div>
-        </div>
+        <div class="brand">KANBAR366</div>
+        <nav style="display: flex; gap: 30px;">
+            <span>المشاريع</span>
+            <span>التقنيات</span>
+            <span style="color: var(--accent);">تواصل</span>
+        </nav>
     </header>
 
-    <div class="features">
-        <div class="feature-card">
-            <span class="icon">💎</span>
-            <h3>كود نظيف ومرتب</h3>
-            <p>أكتب كوداً برمجياً واضحاً يسهل التعديل عليه مستقبلاً من قبل أي مبرمج.</p>
-        </div>
-
-        <div class="feature-card">
-            <span class="icon">📱</span>
-            <h3>متجاوب بالكامل</h3>
-            <p>الصفحة تعمل بكفاءة عالية على الجوال، التابلت، والكمبيوتر لتجربة مستخدم مثالية.</p>
-        </div>
-
-        <div class="feature-card">
-            <span class="icon">🛠️</span>
-            <h3>دعم مستمر</h3>
-            <p>سأكون معك بعد التسليم لأي استفسارات أو تعديلات بسيطة لضمان رضاك التام.</p>
-        </div>
+    <div class="ultimate-title">
+        <p style="color: var(--accent); letter-spacing: 5px;">ARCHITECTING THE WEB</p>
+        <h1>أعمالي الفنية</h1>
     </div>
 
-    <section class="about-section">
-        <h2>جاهز لتحويل فكرتك إلى واقع؟</h2>
-        <p style="max-width: 600px; margin: 20px auto; opacity: 0.8;">
-            أنا قنبر، أهتم بأدق التفاصيل لتقديم منتج نهائي يليق بهويتك التجارية.
-        </p>
+    <section class="projects-showcase">
+        
+        <div class="project-row">
+            <div class="code-preview">
+                <pre>
+<code>
+<span style="color: #c586c0;">const</span> <span style="color: #4ec9b0;">AI_Platform</span> = () => {
+  <span style="color: #6a9955;">// Initializing Intelligence...</span>
+  <span style="color: #dcdcaa;">render</span>(
+    &lt;<span style="color: #569cd6;">Brain</span> depth={<span style="color: #ce9178;">"Deep"</span>} /&gt;
+  );
+};
+<span style="color: #569cd6;">export default</span> AI_Platform;
+</code>
+                </pre>
+            </div>
+            <div class="project-card">
+                <div style="font-size: 3rem; margin-bottom: 10px;">🧠</div>
+                <h2>AI-Platform For Business</h2>
+                <div class="tag-list">
+                    <span>Next.js</span> <span>Python</span> <span>OpenAI</span>
+                </div>
+                <p style="color: #aaa; margin-bottom: 30px;">نظام ذكاء اصطناعي متكامل يحلل بيانات الشركات ويعطي توصيات برمجية دقيقة.</p>
+                <a href="#" class="btn-live">معاينة المشروع</a>
+            </div>
+        </div>
+
+        <div class="project-row">
+            <div class="code-preview">
+                <pre>
+<code>
+<span style="color: #569cd6;">interface</span> <span style="color: #4ec9b0;">StoreProps</span> {
+  securePayment: <span style="color: #4ec9b0;">boolean</span>;
+  fastShipping: <span style="color: #4ec9b0;">number</span>;
+}
+<span style="color: #6a9955;">// High-End E-Commerce System</span>
+</code>
+                </pre>
+            </div>
+            <div class="project-card">
+                <div style="font-size: 3rem; margin-bottom: 10px;">🛍️</div>
+                <h2>E-Commerce System</h2>
+                <div class="tag-list">
+                    <span>React</span> <span>Node.js</span> <span>Stripe</span>
+                </div>
+                <p style="color: #aaa; margin-bottom: 30px;">متجر إلكتروني فخم بخصائص دفع سريعة وتصميم مستقبلي (Neon Dark).</p>
+                <a href="#" class="btn-live">معاينة المشروع</a>
+            </div>
+        </div>
+
     </section>
 
     <footer>
-        <p>مصمم بواسطة: <strong>قنبر366</strong></p>
-        <p class="copyright">جميع الحقوق محفوظة &copy; 2026</p>
-        <p style="color: var(--accent); font-size: 0.8rem; margin-top: 10px;">(هذا الموقع نموذج عرض فقط)</p>
+        <p>تم التصميم والبرمجة بواسطة kanbar366 - ٢٠٢٦</p>
     </footer>
 
 </body>
 </html>
-
